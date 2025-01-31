@@ -10,6 +10,7 @@ const deleteItem = require('./routes/deleteItem');
 app.use(express.json());
 app.use(express.static(__dirname + '/static'));
 
+app.get('/api/', (req,res)=>(res.send("welcome to Backend working fine!!!!")));
 app.get('/api/greeting', getGreeting);
 app.get('/api/items', getItems);
 app.post('/api/items', addItem);

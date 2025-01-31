@@ -58,6 +58,8 @@ FROM base AS backend-dev
 COPY backend/package.json backend/yarn.lock ./
 RUN --mount=type=cache,id=yarn,target=/usr/local/share/.cache/yarn \
     yarn install --frozen-lockfile
+# Install MongoDB package specifically (if required for backend)
+RUN yarn add mongodb
 COPY backend/spec ./spec
 COPY backend/src ./src
 CMD ["yarn", "dev"]
