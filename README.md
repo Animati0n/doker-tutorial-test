@@ -31,8 +31,8 @@ To spin up the project, simply install Docker Desktop and then run the following
 commands:
 
 ```
-git clone https://github.com/docker/getting-started-todo-app
-cd getting-started-todo-app
+git clone https://github.com/Animati0n/doker-tutorial-test.git
+cd doker-tutorial-test
 docker compose up -d
 ```
 
@@ -46,7 +46,7 @@ Any changes made to either the backend or frontend should be seen immediately
 without needing to rebuild or restart the containers.
 
 To help with the database, the development stack also includes phpMyAdmin, which
-can be access at [http://db.localhost](http://db.localhost) (most browsers will 
+can be access at [http://mongo.localhost](http://mongo.localhost) (most browsers will 
 resolve `*.localhost` correctly, so no hosts file changes should be required).
 
 #### Tearing it down
