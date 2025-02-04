@@ -30,11 +30,11 @@ export function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
     };
 
     return (
-        <Container fluid className={`item ${item.completed && 'completed'}`}>
+        <Container fluid className={`item text-white ${item.completed && 'completed'}`}>
             <Row>
                 <Col xs={2} className="text-center">
                     <Button
-                        className="toggles"
+                        className={`toggles ${item.completed && 'text-success'}`}
                         size="sm"
                         variant="link"
                         onClick={toggleCompletion}
