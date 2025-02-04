@@ -41,7 +41,7 @@ services:
     image: traefik:v2.11
     command: --providers.docker
     ports:
-      - 80:80
+      - 7000:80
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -70,10 +70,10 @@ services:
       context: ./
       target: backend-dev
     environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DB: todos
+      MONGO_HOST: mongodb://root:example@mongo:27017/
+      MONGO_USER: root
+      MONGO_PASSWORD: example
+      MONGO_DB: todos
     develop:
       watch:
         - path: ./backend/src
@@ -84,7 +84,8 @@ services:
     labels:
       traefik.http.routers.backend.rule: Host(`localhost`) && PathPrefix(`/api`)
       traefik.http.services.backend.loadbalancer.server.port: 3000
-
+    depends_on:
+      - mongo
   ###################################################
   # Service: client
   #
@@ -132,14 +133,22 @@ services:
   # database to create. Since these are used only for local development, it's
   # ok to hard-code them here.
   ###################################################
-  mysql:
-    image: mysql:8.0
-    volumes:
-      - todo-mysql-data:/var/lib/mysql
-    environment: 
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: todos
+  # mysql:
+  #   image: mysql:8.0
+  #   volumes:
+  #     - todo-mysql-data:/var/lib/mysql
+  #   environment: 
+  #     MYSQL_ROOT_PASSWORD: secret
+  #     MYSQL_DATABASE: todos
 
+  mongo:
+    image: mongo:4.0
+    volumes:
+    - mongoDb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: todos
   ###################################################
   # Service: phpmyadmin
   #
@@ -155,16 +164,29 @@ services:
   # routing rules. In this case, all requests to db.localhost will be forwarded
   # to this service's port 80.
   ###################################################
-  phpmyadmin:
-    image: phpmyadmin
-    environment:
-      PMA_HOST: mysql
-      PMA_USER: root
-      PMA_PASSWORD: secret
-    labels:
-      traefik.http.routers.phpmyadmin.rule: Host(`db.localhost`)
-      traefik.http.services.phpmyadmin.loadbalancer.server.port: 80
+  # phpmyadmin:
+  #   image: phpmyadmin
+  #   environment:
+  #     PMA_HOST: mysql
+  #     PMA_USER: root
+  #     PMA_PASSWORD: secret
+  #   labels:
+  #     traefik.http.routers.phpmyadmin.rule: Host(`db.localhost`)
+  #     traefik.http.services.phpmyadmin.loadbalancer.server.port: 80
 
+  mongo-express:
+    image: mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+    labels:
+      traefik.http.routers.mongoexpress.rule: Host(`mongo.localhost`)
+      traefik.http.services.mongoexpress.loadbalancer.server.port: 8081
+    depends_on:
+      - mongo
 ###################################################
 # Volumes
 #
@@ -173,4 +195,5 @@ services:
 # hence the lack of any configuration for the volume.
 ###################################################
 volumes:
-  todo-mysql-data:
+  # todo-mongo-data:
+  mongoDb:
