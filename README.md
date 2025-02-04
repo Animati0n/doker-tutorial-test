@@ -1,12 +1,14 @@
-<<<<<<< HEAD
-# Getting Started Todo App
+
+# doker-tutorial-test
+
+## Getting Started Todo App
 
 This project provides a sample todo list application. It demonstrates all of
 the current Docker best practices, ranging from the Compose file, to the
 Dockerfile, to CI (using GitHub Actions), and running tests. It's intended to 
 be a well-documented to ensure anyone can come in and easily learn.
 
-## Application architecture
+### Application architecture
 
 ![image](https://github.com/docker/getting-started-todo-app/assets/313480/c128b8e4-366f-4b6f-ad73-08e6652b7c4d)
 
@@ -24,7 +26,7 @@ they are split into two separate services. This allows [Vite](https://vitejs.dev
 to manage the React app while [nodemon](https://nodemon.io/) works with the 
 backend. With containers, it's easy to separate the development needs!
 
-## Development
+### Development
 
 To spin up the project, simply install Docker Desktop and then run the following 
 commands:
@@ -48,13 +50,10 @@ To help with the database, the development stack also includes phpMyAdmin, which
 can be access at [http://db.localhost](http://db.localhost) (most browsers will 
 resolve `*.localhost` correctly, so no hosts file changes should be required).
 
-### Tearing it down
+#### Tearing it down
 
 When you're done, simply remove the containers by running the following command:
 
 ```
 docker compose down
 ```
-=======
-# doker-tutorial-test
->>>>>>> 1a1edd85c5c6cb539b8caafbe39f6593f0931e0d
