@@ -26,7 +26,7 @@ to manage the React app while [nodemon](https://nodemon.io/) works with the
 backend. With containers, it's easy to separate the development needs!
 
 ### Development
-
+<!-- old project repo https://github.com/docker/getting-started-todo-app -->
 To spin up the project, simply install Docker Desktop and then run the following 
 commands:
 
@@ -45,7 +45,7 @@ Simply open to [http://localhost](http://localhost) to see the app up and runnin
 Any changes made to either the backend or frontend should be seen immediately
 without needing to rebuild or restart the containers.
 
-To help with the database, the development stack also includes phpMyAdmin, which
+To help with the database, the development stack also includes Mongo-Express, which
 can be access at [http://mongo.localhost](http://mongo.localhost) (most browsers will 
 resolve `*.localhost` correctly, so no hosts file changes should be required).
 
