@@ -142,14 +142,13 @@ services:
   #     MYSQL_DATABASE: todos
 
   mongo:
-    image: mongodb/mongodb-community-server:7.0
-    restart: always
+    image: mongo:4.0
     volumes:
     - mongoDb:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-
+      MONGO_INITDB_DATABASE: todos
   ###################################################
   # Service: phpmyadmin
   #
@@ -186,6 +185,8 @@ services:
     labels:
       traefik.http.routers.mongoexpress.rule: Host(`mongo.localhost`)
       traefik.http.services.mongoexpress.loadbalancer.server.port: 8081
+    depends_on:
+      - mongo
 ###################################################
 # Volumes
 #
@@ -194,4 +195,5 @@ services:
 # hence the lack of any configuration for the volume.
 ###################################################
 volumes:
-  todo-mongo-data:
+  # todo-mongo-data:
+  mongoDb:

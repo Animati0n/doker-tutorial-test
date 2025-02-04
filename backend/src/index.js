@@ -23,6 +23,7 @@ db.init()
     })
     .catch((err) => {
         console.error(err);
+        console.dir(err)
         process.exit(1);
     });
 

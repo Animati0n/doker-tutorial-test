@@ -11,5 +11,5 @@ export function Greeting() {
 
     if (!greeting) return null;
 
-    return <h1 className="text-center mb-5">{greeting}</h1>;
+    return <h1 className="text-center text-white mb-5">{greeting}</h1>;
 }
