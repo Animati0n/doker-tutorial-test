@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started Todo App
 
 This project provides a sample todo list application. It demonstrates all of
@@ -54,3 +55,6 @@ When you're done, simply remove the containers by running the following command:
 ```
 docker compose down
 ```
+=======
+# doker-tutorial-test
+>>>>>>> 1a1edd85c5c6cb539b8caafbe39f6593f0931e0d
